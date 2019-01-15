@@ -17,8 +17,9 @@ app.use(express.json());
 // this means that the first function require() returns another function app() and then
 // app() is called immediately after
 // taken from week 13-activity16-solved
-require("./app/routing/htmlRoutes")(app);
 require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
+
 
 // start the server and begin to listen
 // using as test for now
