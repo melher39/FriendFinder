@@ -21,6 +21,10 @@ app.post("/api/friends", (req,res) => {
     let totalDifference;
     // this will be the compilation of totalDifferences stored in an array to retrieve the most compatible
     let comparisonArray = [];
+    // this will hold the names of the users respective to the scores in the differenceArray above
+    let individualNamesArray = [];
+    // most compatible result by name
+    let matchName;
 
     console.log(newFriend);
     console.log("existing scores:" + friendData[0].scores)
@@ -37,10 +41,15 @@ app.post("/api/friends", (req,res) => {
         // store the existing user scores and the new user scores in variables
         const newScore = newFriend.scores;
         let existingScores = friendData[i].scores;
+
+        // the name of the already existing user being compared to the new user
+        let existingUserName = friendData[i].name;
         // existingScores += existingScores;
 
         // empty array which will hold the difference in scores per index of the users
         let differenceArray = [];
+        
+
         
         // loop through the array to compare each individual score
         for(let j=0;j<newScore.length;j++) {
@@ -57,12 +66,14 @@ app.post("/api/friends", (req,res) => {
             
         }
         console.log("this is the difference in scores array: " + differenceArray);
-        // use the reduce method to add all the values in the array that stores all the differences in scores
+        // use the reduce method to add all the values in the differenceArray
         totalDifference = differenceArray.reduce((a,b) => a+b);
-        console.log("this is line 59: working!!! " + totalDifference);
+        console.log("this is line 59: working!!! " + totalDifference + "and it belongs to: " + existingUserName);
 
         // adding the totalDifference to the comparisonArray
-        comparisonArray.push(totalDifference); 
+        comparisonArray.push(totalDifference);
+        // adding the existingUserName to the individualNamesArray
+        individualNamesArray.push(existingUserName);
         console.log("comparison array: "+ comparisonArray);
 
     }
@@ -71,11 +82,22 @@ app.post("/api/friends", (req,res) => {
     // added this after the for loops so the new user's scores wouldn't compare to itself
     friendData.push(newFriend);
 
-    // ES6 spread operator to find the minimum value in this array
+    // ES6 spread operator to find the minimum (Math.min) value in this array
+    // without the spread operator, the array is not recognized when it has multiple values
     // found this tip on the site jstips.co
     let mostCompatible = Math.min(...comparisonArray);
 
     console.log("Your most compatible match scored: " + mostCompatible);
+    console.log("One of these people: " + individualNamesArray);
+
+    // inde
+    console.log(comparisonArray.indexOf(mostCompatible));
+
+    // assign the name to the matchName variable using the index number of the mostCompatible result
+    matchName=individualNamesArray[comparisonArray.indexOf(mostCompatible)];
+
+    // BOOM! There it is!
+    console.log("Your match is: "+ matchName);
     
 
 });
