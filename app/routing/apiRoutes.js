@@ -17,50 +17,66 @@ app.post("/api/friends", (req,res) => {
     // taken from week-13-activity-16-solved-apiRoutes.js
     const newFriend = req.body;
 
-    // totalDifference will be the difference between the scores of the users
+    // totalDifference will be the difference between the scores of the current user and another being compared
     let totalDifference;
+    // this will be the compilation of totalDifferences stored in an array to retrieve the most compatible
+    let comparisonArray = [];
 
     console.log(newFriend);
     console.log("existing scores:" + friendData[0].scores)
     console.log("new friend scores: " + newFriend.scores);
     
 
-    // add this new data to the existing friendsList array
-    // friendData.push(newFriend);
+    
     // display the updated array
     // res.json(friendData);
 
     // iterate over the friendData array
     for (let i=0; i<friendData.length; i++){
 
-        
+        // store the existing user scores and the new user scores in variables
         const newScore = newFriend.scores;
-        const existingScores = friendData[i].scores;
+        let existingScores = friendData[i].scores;
+        // existingScores += existingScores;
 
-        let differenceArray= [];
+        // empty array which will hold the difference in scores per index of the users
+        let differenceArray = [];
         
+        // loop through the array to compare each individual score
         for(let j=0;j<newScore.length;j++) {
             
+            // find the individual index score difference 
             let indexDifference = newScore[j] - existingScores[j];
-            console.log("line 42: " + indexDifference);
+            // console.log("line 42: " + indexDifference);
+            // get the absolute value of the indexDifference
             indexDifference = Math.abs(indexDifference);
-            console.log("absolute value: " + indexDifference);
+            // console.log("absolute value: " + indexDifference);
 
+            // add these individual results to the array containing all the differences in scores
             differenceArray.push(indexDifference);
-        
-            // totalDifference += totalDifference;
-            // Math.abs(indexDifference) += Math.abs(indexDifference);
-
-
-            // console.log("line 49: " + indexDifference);
             
         }
         console.log("this is the difference in scores array: " + differenceArray);
-        // use the reduce method to add all the values in the array that stores all the differences in values
-        totalDifference = differenceArray.reduce((a,b) => a+b)
+        // use the reduce method to add all the values in the array that stores all the differences in scores
+        totalDifference = differenceArray.reduce((a,b) => a+b);
+        console.log("this is line 59: working!!! " + totalDifference);
+
+        // adding the totalDifference to the comparisonArray
+        comparisonArray.push(totalDifference); 
+        console.log("comparison array: "+ comparisonArray);
 
     }
-    console.log("this is line 46: working!!! " + totalDifference);
+
+    // add this new data to the existing friendsList array
+    // added this after the for loops so the new user's scores wouldn't compare to itself
+    friendData.push(newFriend);
+
+    // ES6 spread operator to find the minimum value in this array
+    // found this tip on the site jstips.co
+    let mostCompatible = Math.min(...comparisonArray);
+
+    console.log("Your most compatible match scored: " + mostCompatible);
+    
 
 });
 
