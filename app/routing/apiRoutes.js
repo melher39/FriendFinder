@@ -90,7 +90,7 @@ app.post("/api/friends", (req,res) => {
     console.log("Your most compatible match scored: " + mostCompatible);
     console.log("One of these people: " + individualNamesArray);
 
-    // inde
+    // index of most compatible
     console.log(comparisonArray.indexOf(mostCompatible));
 
     // assign the name to the matchName variable using the index number of the mostCompatible result
@@ -98,6 +98,11 @@ app.post("/api/friends", (req,res) => {
 
     // BOOM! There it is!
     console.log("Your match is: "+ matchName);
+
+    // this will be the data sent back to the client when they hit the submit button
+    // this will be their match's information
+    res.json(friendData[comparisonArray.indexOf(mostCompatible)]);
+    
     
 
 });

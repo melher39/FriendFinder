@@ -22,7 +22,7 @@
             <div class="section">
                 <div class="row">
 
-                    <form class="col s12">
+                    <form method="POST" class="col s12">
                         <h5>About you</h5>
 
                         <!-- name of the person -->
@@ -45,7 +45,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 1</h5>
                                 <h6>You are a morning person.</h6>
-                                <select>
+                                <select id="question1">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -59,7 +59,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 2</h5>
                                 <h6>You love cats.</h6>
-                                <select>
+                                <select id="question2">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -73,7 +73,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 3</h5>
                                 <h6>You love dogs.</h6>
-                                <select>
+                                <select id="question3">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -87,7 +87,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 4</h5>
                                 <h6>Pineapple on pizza.</h6>
-                                <select>
+                                <select id="question4">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -101,7 +101,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 5</h5>
                                 <h6>You live for the moment.</h6>
-                                <select>
+                                <select id="question5">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -115,7 +115,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 6</h5>
                                 <h6>Books > Movies</h6>
-                                <select>
+                                <select id="question6">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -129,7 +129,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 7</h5>
                                 <h6>You are easily distracted by your phone.</h6>
-                                <select>
+                                <select id="question7">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -143,7 +143,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 8</h5>
                                 <h6>Coffee is life.</h6>
-                                <select>
+                                <select id="question8">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -157,7 +157,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 9</h5>
                                 <h6>You are a picky eater.</h6>
-                                <select>
+                                <select id="question9">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -171,7 +171,7 @@
                             <div class="input-field col s3">
                                 <h5>Question 10</h5>
                                 <h6>"But I don't wanna be a pirate!"</h6>
-                                <select>
+                                <select id="question10">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (What?)</option>
                                     <option value="2">2</option>
@@ -205,6 +205,39 @@
         // this allows the dropdown select form to work
         // static code from materializecss site
         $("select").formSelect();
+
+        // when the submit button is clicked...
+        $("#submit-button").on("click", (event) => {
+
+            // prevents the form from reloading the page
+            event.preventDefault();
+
+            // grab the survey answers
+            let addSurvey = {
+                name: $("#name").val().trim(),
+                photo: $("#person-photo").val().trim(),
+                scores: [
+                    $("#question1").val(),
+                    $("#question2").val(),
+                    $("#question3").val(),
+                    $("#question4").val(),
+                    $("#question5").val(),
+                    $("#question6").val(),
+                    $("#question7").val(),
+                    $("#question8").val(),
+                    $("#question9").val(),
+                    $("#question10").val()
+                ]
+            };
+            
+            console.log("Your new user is: " + addSurvey)
+
+            $.post("/api/friends", addSurvey, (data) => {
+
+                console.log("This is your match: " + data);
+            });
+
+        });
 
     </script>
 
