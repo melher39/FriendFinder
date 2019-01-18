@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Sets up the Express app to handle data parsing
+// aka the middleware
 // static code taken from week13-activity 13
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

@@ -39,7 +39,7 @@
                                 <label for="person-photo">Link to Photo Image (Required)</label>
                             </div>
                         </div>
-                        
+
                         <!-- questions -->
                         <div class="row">
                             <div class="input-field col s3">
@@ -182,13 +182,30 @@
                             </div>
                         </div>
                         <!-- submit button will go here -->
-                        <button class="btn waves-effect waves-light" type="submit" name="action" id="submit-button">Submit
+                        <button href="#modal1" class="btn waves-effect waves-light modal-trigger" type="submit" name="action"
+                            id="submit-button">Submit
                             <i class="material-icons right">send</i>
                         </button>
+
+                        <!-- modal with results will be here -->
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                                <h4>Best Match</h4>
+                                <p id="#match-name"></p>
+                                <p id="#match-photo"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                            </div>
+                        </div>
 
                     </form>
 
                 </div>
+
+
+
+
             </div>
         </div>
     </main>
@@ -206,8 +223,13 @@
         // static code from materializecss site
         $("select").formSelect();
 
+
         // when the submit button is clicked...
         $("#submit-button").on("click", (event) => {
+
+            // let modalContent;
+            // let matchName;
+            // let matchURL;
 
             // prevents the form from reloading the page
             event.preventDefault();
@@ -229,15 +251,39 @@
                     $("#question10").val()
                 ]
             };
-            
+
             console.log("Your new user is: " + addSurvey)
 
-            $.post("/api/friends", addSurvey, (data) => {
+            // this loads the data from the server in the location of the URL (/api/friends)
+            // addSurvey is the info or data this request is sending to the server
+            // data is the resulting data from this request
+            $(".modal").modal({
+                onOpenStart() {
+                    $.post("/api/friends", addSurvey, (data) => {
+                        // jquery for modal pop-up
 
-                console.log("This is your match: " + data);
+
+                        // this is resulting information of the current user's most compatible match
+                        let matchName = data.name;
+                        let matchURL = data.photo;
+
+                        $("#match-name").html("matchName");
+                        $("#match-photo").html(matchURL);
+                        // modalContent = "<div class='modal-content'><p>" +matchName + "</p><p>"+ matchURL +"</p></div>"
+
+                        console.log("This is your match: " + matchName + "\nLink: " + matchURL);
+
+                    });
+                }
             });
+            // $("#match-name").html("matchName");
+            // $("#match-photo").html(matchURL);
+            // // $(".modal").append(modalContent);
+            // $(".modal").modal();
 
         });
+
+
 
     </script>
 

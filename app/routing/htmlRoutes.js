@@ -14,9 +14,8 @@ app.get("/survey", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/survey.html"))
 });
 
-// * means all/any other route not matching the above will default to home
-// cannot use * since it will always default to the home html, even a user is looking for the api's, will look more into it
-app.get("/home", (req, res) => {
+// * means all/any other route not matching the above nor api routes will default to home
+app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/home.html"))
 });
 
