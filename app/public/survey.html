@@ -182,8 +182,8 @@
                             </div>
                         </div>
                         <!-- submit button will go here -->
-                        <button href="#modal1" class="btn waves-effect waves-light modal-trigger" type="submit" name="action"
-                            id="submit-button">Submit
+                        <button class="btn waves-effect waves-light" type="submit" name="action" id="submit-button">
+                            Submit
                             <i class="material-icons right">send</i>
                         </button>
 
@@ -210,6 +210,13 @@
         </div>
     </main>
 
+    <!-- footer with the api friends list github repo links -->
+    <footer class="container">
+            <a href="/api/friends">API Friends List </a> 
+            <strong>|</strong>
+            <a href="https://github.com/melher39/FriendFinder" target="_blank"> GitHub Repo</a>
+    </footer>
+
 
     <!-- Scripts at the bottom of the page to optimize loading -->
     <!-- jQuery loaded first so materialize functions can work properly-->
@@ -220,8 +227,10 @@
     <script type="text/javascript">
 
         // this allows the dropdown select form to work
-        // static code from materializecss site
+        // initialize select dropdown - materialize.css documentation
         $("select").formSelect();
+        // initialize modal - materialize.css documentation
+        $(".modal").modal();
 
 
         // when the submit button is clicked...
@@ -257,8 +266,8 @@
             // this loads the data from the server in the location of the URL (/api/friends)
             // addSurvey is the info or data this request is sending to the server
             // data is the resulting data from this request
-            $(".modal").modal({
-                onOpenStart() {
+            // $(".modal").modal({
+                // onOpenStart() {
                     $.post("/api/friends", addSurvey, (data) => {
                         // jquery for modal pop-up
 
@@ -267,21 +276,29 @@
                         let matchName = data.name;
                         let matchURL = data.photo;
 
-                        $("#match-name").html("matchName");
-                        $("#match-photo").html(matchURL);
+                        const compileInfo = ()=>{
+                            $("#match-name").html("matchName");
+                            $("#match-photo").html(matchURL);
+
+                        };
+
+                        
                         // modalContent = "<div class='modal-content'><p>" +matchName + "</p><p>"+ matchURL +"</p></div>"
+
+                        $("#modal1").modal("open", compileInfo);
 
                         console.log("This is your match: " + matchName + "\nLink: " + matchURL);
 
                     });
-                }
+                // }
             });
+            // console.log("this is the data: " + data);
             // $("#match-name").html("matchName");
             // $("#match-photo").html(matchURL);
             // // $(".modal").append(modalContent);
-            // $(".modal").modal();
+            // $("#modal1").modal();
 
-        });
+        // });
 
 
 
