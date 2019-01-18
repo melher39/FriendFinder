@@ -191,8 +191,8 @@
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4>Best Match</h4>
-                                <p id="#match-name"></p>
-                                <p id="#match-photo"></p>
+                                <p id="match-name"></p>
+                                <p id="match-photo"></p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -200,7 +200,12 @@
                         </div>
 
                     </form>
-
+                    
+                    <!-- test section -->
+                    <div>
+                            <!-- <p id="match-name">blank</p>
+                            <p id="match-photo">blank</p> -->
+                    </div>
                 </div>
 
 
@@ -209,6 +214,7 @@
             </div>
         </div>
     </main>
+    <br>
 
     <!-- footer with the api friends list github repo links -->
     <footer class="container">
@@ -266,39 +272,48 @@
             // this loads the data from the server in the location of the URL (/api/friends)
             // addSurvey is the info or data this request is sending to the server
             // data is the resulting data from this request
-            // $(".modal").modal({
-                // onOpenStart() {
+
+            // $("#modal1").modal("open",{ //comment this out if this doesn't work
+                // onOpenEnd() { //comment this out if this doesn't work
                     $.post("/api/friends", addSurvey, (data) => {
                         // jquery for modal pop-up
 
 
                         // this is resulting information of the current user's most compatible match
-                        let matchName = data.name;
+                       let matchName = data.name;
                         let matchURL = data.photo;
 
-                        const compileInfo = ()=>{
-                            $("#match-name").html("matchName");
+                        // const compileInfo = ()=>{
+                            $("#match-name").html(matchName);
                             $("#match-photo").html(matchURL);
 
-                        };
+                        // };
 
                         
                         // modalContent = "<div class='modal-content'><p>" +matchName + "</p><p>"+ matchURL +"</p></div>"
 
-                        $("#modal1").modal("open", compileInfo);
+                        $("#modal1").modal("open");
 
                         console.log("This is your match: " + matchName + "\nLink: " + matchURL);
 
+                    // }, ()=>{
+                    //     $("#modal1").modal("open");
                     });
-                // }
-            });
-            // console.log("this is the data: " + data);
+
+                //     console.log("this is the data: " + matchName);
+                // $("#match-name").html("matchName");
+                // $("#modal1").modal("open");
+                // console.log("this is the data: " + matchName);
+
+            // } //this also needs to be commendted out
+        // }); //this needs to be commented out if this doesn't work
+            
             // $("#match-name").html("matchName");
             // $("#match-photo").html(matchURL);
             // // $(".modal").append(modalContent);
-            // $("#modal1").modal();
+            // $("#modal1").modal("open");
 
-        // });
+        }); // this is for the submit button
 
 
 
