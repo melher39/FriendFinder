@@ -1,6 +1,5 @@
 // this array below will hold all of the friends who completed the survey
-// testing it with mock information for now
-// will add more later
+
 const friendsList = [
     {
         name: "Leo",

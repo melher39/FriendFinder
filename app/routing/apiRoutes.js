@@ -15,7 +15,7 @@ module.exports = (app) => {
     // this will take the user's info and add it to the existing /api/friends
     app.post("/api/friends", (req, res) => {
         // req.body is available since we're using the body parsing middleware
-        // basically store the user-submitted data in this variable
+        // basically store the translated user-submitted data in this variable
         // taken from week-13-activity-16-solved-apiRoutes.js
         const newFriend = req.body;
 
@@ -27,10 +27,6 @@ module.exports = (app) => {
         let individualNamesArray = [];
         // most compatible result by name
         let matchName;
-
-        console.log(newFriend);
-        console.log("existing scores:" + friendData[0].scores)
-        console.log("new friend scores: " + newFriend.scores);
 
         // iterate over the friendData array
         for (let i = 0; i < friendData.length; i++) {
@@ -58,16 +54,15 @@ module.exports = (app) => {
                 differenceArray.push(indexDifference);
 
             }
-            console.log("this is the difference in scores array: " + differenceArray);
+
             // use the reduce method to add all the values in the differenceArray
             totalDifference = differenceArray.reduce((a, b) => a + b);
-            console.log("this is the total difference: " + totalDifference + " and it belongs to: " + existingUserName);
 
             // adding the totalDifference to the comparisonArray
             comparisonArray.push(totalDifference);
+
             // adding the existingUserName to the individualNamesArray
             individualNamesArray.push(existingUserName);
-            console.log("comparison array: " + comparisonArray);
 
         }
 
@@ -80,12 +75,6 @@ module.exports = (app) => {
         // found this tip on the site jstips.co
         let mostCompatible = Math.min(...comparisonArray);
 
-        console.log("Your most compatible match scored: " + mostCompatible);
-        console.log("One of these people: " + individualNamesArray);
-
-        // index of most compatible
-        console.log(comparisonArray.indexOf(mostCompatible));
-
         // assign the name to the matchName variable using the index number of the mostCompatible result
         matchName = individualNamesArray[comparisonArray.indexOf(mostCompatible)];
 
@@ -95,9 +84,6 @@ module.exports = (app) => {
         // this will be the data sent back to the client when they hit the submit button
         // this will be their match's information
         res.json(friendData[comparisonArray.indexOf(mostCompatible)]);
-
-
-
+        
     });
-
 };
