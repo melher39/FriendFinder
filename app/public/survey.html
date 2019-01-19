@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- custom css -->
-    <link rel="stylesheet" href="../../assets/css/style.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Survey</title>
@@ -48,7 +46,7 @@
                                 <h5>Question 1</h5>
                                 <h6>You are a morning person.</h6>
                                 <select id="question1" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -62,7 +60,7 @@
                                 <h5>Question 2</h5>
                                 <h6>You love cats.</h6>
                                 <select id="question2" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -76,7 +74,7 @@
                                 <h5>Question 3</h5>
                                 <h6>You love dogs.</h6>
                                 <select id="question3" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -90,7 +88,7 @@
                                 <h5>Question 4</h5>
                                 <h6>Pineapple on pizza.</h6>
                                 <select id="question4" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -104,7 +102,7 @@
                                 <h5>Question 5</h5>
                                 <h6>You live for the moment.</h6>
                                 <select id="question5" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -118,7 +116,7 @@
                                 <h5>Question 6</h5>
                                 <h6>Books > Movies</h6>
                                 <select id="question6" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -132,7 +130,7 @@
                                 <h5>Question 7</h5>
                                 <h6>You are easily distracted by your phone.</h6>
                                 <select id="question7" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -146,7 +144,7 @@
                                 <h5>Question 8</h5>
                                 <h6>Coffee is life.</h6>
                                 <select id="question8" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -160,7 +158,7 @@
                                 <h5>Question 9</h5>
                                 <h6>You are a picky eater.</h6>
                                 <select id="question9" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -174,7 +172,7 @@
                                 <h5>Question 10</h5>
                                 <h6>"But I don't wanna be a pirate!"</h6>
                                 <select id="question10" class="survey">
-                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="0" disabled selected>Select an option</option>
                                     <option value="1">1 (What?)</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -236,8 +234,36 @@
             // prevents the form from reloading the page
             event.preventDefault();
 
+            // input fields form validation
+            // got this idea from stack overflow, had to tweak it to make it work for mine
+            // https://stackoverflow.com/questions/18465508/check-if-inputs-form-are-empty-jquery/18465628
+            const checkIfComplete = () => {
+                // set complete to true, which is default, will make it easier to validate later
+                let complete = true;
+                // loop through each of the inputs in the survey class select element...
+                $(".survey").each(function () {
+                    // if the input is null then this means the input is empty in this case
+                    // and assign complete to false
+                    if ($(this).val() === null) {
+                        complete = false;
+                    }
+                });
+
+                // loop through the two text inputs in the survey
+                $(".validate").each(function () {
+                    // if the input is empty then assign complete to false
+                    if ($(this).val().trim() === "") {
+                        complete = false;
+
+                    }
+                });
+                // return complete whether it is true or false
+                return complete;
+            }
+
             // input form validation
-            if ($(".survey").val() !== "" && $("#name").val() !== "" && $("#person-photo").val() !== "") {
+            // if the survey is complete...
+            if (checkIfComplete()) {
 
                 // grab the survey answers
                 let addSurvey = {
@@ -261,7 +287,7 @@
                 // addSurvey is the info or data this request is sending to the server
                 // data is the resulting data from this request
                 $.post("/api/friends", addSurvey, (data) => {
-                    
+
                     // this is resulting information of the current user's most compatible match
                     let matchName = data.name;
                     let matchURL = data.photo;
@@ -275,10 +301,11 @@
                 });
             }
 
+            // if the survey is incomplete then warn the user to finish it first before submitting
             else {
                 alert("Please fill out all the fields!");
             }
-        }); 
+        });
 
     </script>
 
