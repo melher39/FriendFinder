@@ -3,19 +3,19 @@
 // will add more later
 const friendsList = [
     {
-        name: "Melvin",
-        photo: "www.google.com",
+        name: "Leo",
+        photo: "https://pbs.twimg.com/profile_images/3786241493/788b36d0a01263b640d80c18447d2436.jpeg",
         scores:[
-            "5",
-            "5",
-            "5",
-            "5",
-            "5",
-            "5",
-            "5",
-            "5",
-            "5",
-            "5"
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
         ]
     }
 ];

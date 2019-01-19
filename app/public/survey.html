@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Survey</title>
@@ -45,7 +47,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 1</h5>
                                 <h6>You are a morning person.</h6>
-                                <select id="question1">
+                                <select id="question1" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -59,7 +61,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 2</h5>
                                 <h6>You love cats.</h6>
-                                <select id="question2">
+                                <select id="question2" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -73,7 +75,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 3</h5>
                                 <h6>You love dogs.</h6>
-                                <select id="question3">
+                                <select id="question3" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -87,7 +89,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 4</h5>
                                 <h6>Pineapple on pizza.</h6>
-                                <select id="question4">
+                                <select id="question4" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -101,7 +103,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 5</h5>
                                 <h6>You live for the moment.</h6>
-                                <select id="question5">
+                                <select id="question5" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -115,7 +117,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 6</h5>
                                 <h6>Books > Movies</h6>
-                                <select id="question6">
+                                <select id="question6" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -129,7 +131,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 7</h5>
                                 <h6>You are easily distracted by your phone.</h6>
-                                <select id="question7">
+                                <select id="question7" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -143,7 +145,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 8</h5>
                                 <h6>Coffee is life.</h6>
-                                <select id="question8">
+                                <select id="question8" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -157,7 +159,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 9</h5>
                                 <h6>You are a picky eater.</h6>
-                                <select id="question9">
+                                <select id="question9" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (Strongly Disagree)</option>
                                     <option value="2">2</option>
@@ -171,7 +173,7 @@
                             <div class="input-field col s12 m6 l3">
                                 <h5>Question 10</h5>
                                 <h6>"But I don't wanna be a pirate!"</h6>
-                                <select id="question10">
+                                <select id="question10" class="survey">
                                     <option value="" disabled selected>Select an option</option>
                                     <option value="1">1 (What?)</option>
                                     <option value="2">2</option>
@@ -190,9 +192,9 @@
                         <!-- modal with results will be here -->
                         <div id="modal1" class="modal">
                             <div class="modal-content">
-                                <h4>Best Match</h4>
-                                <p id="match-name"></p>
-                                <p id="match-photo"></p>
+                                <h4><strong>Best Match</strong></h4>
+                                <h5 id="match-name"></h5>
+                                <img id="match-photo" class="circle"></img>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -200,17 +202,7 @@
                         </div>
 
                     </form>
-                    
-                    <!-- test section -->
-                    <div>
-                            <!-- <p id="match-name">blank</p>
-                            <p id="match-photo">blank</p> -->
-                    </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </main>
@@ -218,9 +210,9 @@
 
     <!-- footer with the api friends list github repo links -->
     <footer class="container">
-            <a href="/api/friends">API Friends List </a> 
-            <strong>|</strong>
-            <a href="https://github.com/melher39/FriendFinder" target="_blank"> GitHub Repo</a>
+        <a href="/api/friends">API Friends List </a>
+        <strong>|</strong>
+        <a href="https://github.com/melher39/FriendFinder" target="_blank"> GitHub Repo</a>
     </footer>
 
 
@@ -249,6 +241,12 @@
             // prevents the form from reloading the page
             event.preventDefault();
 
+            // conditional
+            if($(".survey").val() === "" || $("#name").val() === "" || $("#person-photo").val() === ""){
+                alert("Please fill out all the fields!");
+            }
+
+            else{
             // grab the survey answers
             let addSurvey = {
                 name: $("#name").val().trim(),
@@ -274,40 +272,41 @@
             // data is the resulting data from this request
 
             // $("#modal1").modal("open",{ //comment this out if this doesn't work
-                // onOpenEnd() { //comment this out if this doesn't work
-                    $.post("/api/friends", addSurvey, (data) => {
-                        // jquery for modal pop-up
+            // onOpenEnd() { //comment this out if this doesn't work
+            $.post("/api/friends", addSurvey, (data) => {
+                // jquery for modal pop-up
 
 
-                        // this is resulting information of the current user's most compatible match
-                       let matchName = data.name;
-                        let matchURL = data.photo;
+                // this is resulting information of the current user's most compatible match
+                let matchName = data.name;
+                let matchURL = data.photo;
 
-                        // const compileInfo = ()=>{
-                            $("#match-name").html(matchName);
-                            $("#match-photo").html(matchURL);
+                // const compileInfo = ()=>{
+                $("#match-name").html(matchName);
+                $("#match-photo").attr("src", matchURL);
 
-                        // };
+                // };
 
-                        
-                        // modalContent = "<div class='modal-content'><p>" +matchName + "</p><p>"+ matchURL +"</p></div>"
 
-                        $("#modal1").modal("open");
+                // modalContent = "<div class='modal-content'><p>" +matchName + "</p><p>"+ matchURL +"</p></div>"
 
-                        console.log("This is your match: " + matchName + "\nLink: " + matchURL);
+                $("#modal1").modal("open");
 
-                    // }, ()=>{
-                    //     $("#modal1").modal("open");
-                    });
+                console.log("This is your match: " + matchName + "\nLink: " + matchURL);
 
-                //     console.log("this is the data: " + matchName);
-                // $("#match-name").html("matchName");
-                // $("#modal1").modal("open");
-                // console.log("this is the data: " + matchName);
+                // }, ()=>{
+                //     $("#modal1").modal("open");
+            });
+            }
+
+            //     console.log("this is the data: " + matchName);
+            // $("#match-name").html("matchName");
+            // $("#modal1").modal("open");
+            // console.log("this is the data: " + matchName);
 
             // } //this also needs to be commendted out
-        // }); //this needs to be commented out if this doesn't work
-            
+            // }); //this needs to be commented out if this doesn't work
+
             // $("#match-name").html("matchName");
             // $("#match-photo").html(matchURL);
             // // $(".modal").append(modalContent);
