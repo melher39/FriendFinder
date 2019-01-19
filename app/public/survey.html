@@ -242,11 +242,9 @@
             event.preventDefault();
 
             // conditional
-            if($(".survey").val() === "" || $("#name").val() === "" || $("#person-photo").val() === ""){
-                alert("Please fill out all the fields!");
-            }
+            
 
-            else{
+            if($(".survey").val() !== "" && $("#name").val() !== "" && $("#person-photo").val() !== ""){
             // grab the survey answers
             let addSurvey = {
                 name: $("#name").val().trim(),
@@ -297,6 +295,10 @@
                 // }, ()=>{
                 //     $("#modal1").modal("open");
             });
+            }
+
+            else {
+                alert("Please fill out all the fields!");
             }
 
             //     console.log("this is the data: " + matchName);
